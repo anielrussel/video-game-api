@@ -1,0 +1,33 @@
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace VideoGameApi.Data
+{
+    public class VideoGameDbContext(DbContextOptions<VideoGameDbContext> options) : DbContext(options)
+    {
+        public DbSet<VideoGame> VideoGames => Set<VideoGame>();
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<VideoGame>().HasData(
+                new VideoGame
+                {
+                    Id = 1,
+                    Title = "Spider Man 2",
+                    Platform = "PS5",
+                    Developer = "Marvel",
+                    Publisher = "Sony"
+                },
+                new VideoGame
+                {
+                    Id = 2,
+                    Title = "Batman",
+                    Platform = "PS5",
+                    Developer = "DC",
+                    Publisher = "Sony"
+                }
+            );
+        }
+    }
+}
